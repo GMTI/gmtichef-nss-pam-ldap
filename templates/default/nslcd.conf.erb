@@ -1,0 +1,124 @@
+# This is the configuration file for the LDAP nameservice
+# switch library's nslcd daemon. It configures the mapping
+# between NSS names (see /etc/nsswitch.conf) and LDAP
+# information in the directory.
+# See the manual page nslcd.conf(5) for more information.
+
+#runtime options
+threads 		<%= @settings['threads'] %>
+uid				<%= @settings['uid'] %>
+gid				<%= @settings['gid'] %>
+<% unless @settings['log'].empty? -%>
+log             <%= @settings['log'] %>
+<% end -%>
+
+#general connection options
+uri				<%= @settings['uri'] %>
+<% unless @settings['ldap_version'].empty? -%>
+ldap_version	<%= @settings['ldap_version'] %>
+<% end -%>
+binddn			<%= @settings['binddn'] %>
+bindpw			<%= @settings['bindpw'] %>
+<% unless @settings['rootpwmoddn'].empty? -%>
+rootpwmoddn     <%= @settings['rootpwmoddn'] %>
+<% end -%>
+<% unless @settings['rootpwmodpw'].empty? -%>
+rootpwmodpw     <%= @settings['rootpwmodpw'] %>
+<% end -%>
+
+#SASL authentication options
+<% if @settings['sasl']['enable'] -%>
+sasl_mech       <%= @settings['sasl']['mech'] %>
+sasl_realm      <%= @settings['sasl']['reaml'] %>
+sasl_authcid    <%= @settings['sasl']['authcid'] %>
+sasl_authzid    <%= @settings['sasl']['secprops'] %>
+sasl_secprops   <%= @settings['sasl']['secprops'] %>
+sasl_canonicalize <%= @settings['sasl']['canonicalize'] %>
+
+<% end -%>
+
+#Kerberos options
+<% unless @settings['krb5_ccname'].empty? -%>
+krb5_ccname       <%= @settings['krb5_ccname'] %>
+<% end -%>
+
+#Search options
+<% unless @settings['base'].empty? -%>
+base 			<%= @settings['base'] %>
+<% end -%>
+scope			<%= @settings['scope'] %>
+deref			<%= @settings['deref'] %>
+referrals		<%= @settings['referrals'] %>
+
+#Timing/reconnect options
+bind_timelimit	<%= @settings['bind_timelimit'] %>
+timelimit 		<%= @settings['timelimit'] %>
+idle_timelimit    <%= @settings['idle_timelimit'] %>
+reconnect_sleeptime <%= @settings['reconnect_sleeptime'] %>
+reconnect_retrytime <%= @settings['reconnect_retrytime'] %>
+
+#SSL/TLS Options
+ssl 			<%= @settings['ssl'] %>
+tls_reqcert     <%= @settings['tls_reqcert'] %>
+tls_cacertdir 	<%= @settings['tls_cacertdir'] %>
+<% unless @settings['tls_cacertfile'].empty? -%>
+tls_cacertfile  <%= @settings['tls_cacertfile'] %>
+<% end -%>
+<% unless @settings['tls_randfile'].empty? -%>
+tls_randfile    <%= @settings['tls_randfile'] %>
+<% end -%>
+<% unless @settings['tls_ciphers'].empty? -%>
+tls_ciphers     <%= @settings['tls_ciphers'] %>
+<% end -%>
+<% unless @settings['tls_cert'].empty? -%>
+tls_cert        <%= @settings['tls_cert'] %>
+<% end -%>
+<% unless @settings['tls_key'].empty? -%>
+tls_key         <%= @settings['tls_key'] %>
+<% end -%>
+
+#Other Options
+pagesize        <%= @settings['pagesize'] %>
+nss_initgroups_ignoreusers	<%= @settings['nss_initgroups_ignoreusers'] %>
+<% unless @settings['nss_min_uid'].empty? -%>
+nss_min_uid     <%= @settings['nss_min_uid'] %>
+<% end -%>
+<% unless @settings['nss_nested_groups'].empty? -%>
+nss_nested_groups <%= @settings['nss_nested_groups'] %>
+<% end -%>
+<% unless @settings['validnames'].empty? -%>
+validnames      <%= @settings['validnames'] %>
+<% end -%>
+<% unless @settings['ignorecase'].empty? -%>
+ignorecase      <%= @settings['ignorecase'] %>
+<% end -%>
+<% unless @settings['pam_authz_search'].empty? -%>
+pam_authz_search <%= @settings['pam_authz_search'] %>
+<% end -%>
+<% unless @settings['pam_password_prohibit_message'] -%>
+pam_password_prohibit_message <%= @settings['pam_password_prohibit_message'] %>
+<% end -%>
+<% unless @settings['reconnect_invalidate'].empty? -%>
+reconnect_invalidate <%= @settings['reconnect_invalidate'] %>
+<% end -%>
+<% unless @settings['cache'].empty? -%>
+cache           <%= @settings['cache']%> 
+<% end -%>
+
+#Filter/Maps
+
+<% unless @settings['filters'].empty? -%>
+<% @settings['filters'].each do |map, entries| -%>
+filter <%= map -%>
+<% unless !entries['class'] || entries['class'].empty? -%>
+ <%= entries['class'] -%>
+<% end -%>
+
+<% unless !entries['maps'] || entries['maps'].empty? -%>
+<% entries['maps'].each do |name, value| -%>
+map <%= map -%> <%= name -%>  <%= value %>
+<% end -%>
+<% end -%>
+
+<% end -%>
+<% end -%>

@@ -1,0 +1,56 @@
+{
+    "name": "nss-pam-ldapd",
+    "version": "0.1.0",
+    "description": "Installs and configures nslcd",
+    "long_description": "",
+    "maintainer": "Dann S Washko",
+    "maintainer_email": "dwashko@gmti.gannett.com",
+    "license": "Apache 2.0",
+    "platforms": {
+        "centos": ">= 0.0.0",
+        "redhat": ">= 0.0.0",
+        "fedora": ">= 0.0.0"
+    },
+    "dependencies": {
+    },
+    "recommendations": {
+    },
+    "suggestions": {
+    },
+    "conflicting": {
+    },
+    "providing": {
+    },
+    "replacing": {
+    },
+    "attributes": {
+        "nslcd": {
+            "display_name": "nslcd",
+            "description": "Hash of nslcd attributes",
+            "type": "hash"
+        },
+        "nslcd/threads": {
+            "display_name": "threads",
+            "description": "specifies number of threads to start that can handle requests and perform LDAP queries",
+            "type": "string",
+            "default": "5"
+        },
+        "nslcd/uid": {
+            "display_name": "uid",
+            "description": "specifies the user id with which the daemon should be run",
+            "type": "string",
+            "default": "nslcd"
+        },
+        "nslcd/gid": {
+            "display_name": "gid",
+            "description": "specifies the group id with which the daemon should be run",
+            "type": "string",
+            "default": "ldap"
+        }
+    },
+    "groupings": {
+    },
+    "recipes": {
+        "nslcd": "Installs and configures nslcd."
+    }
+}

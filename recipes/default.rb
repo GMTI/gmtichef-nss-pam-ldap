@@ -1,0 +1,17 @@
+#
+# Cookbook Name: nslcd
+# Recipe: default
+
+package node['nslcd']['package']
+
+template '/etc/nslcd.conf' do
+  source 'nslcd.conf.erb'
+  mode '0600'
+  variables(
+    settings:  node['nslcd']
+    )
+end
+
+service 'nslcd' do
+  action [:restart]
+end

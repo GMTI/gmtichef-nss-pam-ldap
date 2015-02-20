@@ -1,0 +1,294 @@
+name 'nss-pam-ldapd'
+maintainer 'Daniel Washko'
+maintainer_email 'dwashko@gmti.gannett.com'
+license 'Apache 2.0'
+description 'Installs and configures nslcd'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version '0.1.0'
+
+recipe 'nslcd', 'Installs and configures nslcd.conf'
+
+supports 'centos'
+supports 'redhat'
+
+attribute 'nslcd',
+    :display_name => 'nslcd',
+    :description => 'Hash of nslcd attributes',
+    :type => 'hash'
+
+attribute 'nslcd/threads',
+    :display_name => 'threads',
+    :description => 'specifies number of threads to start that can handle requests and perform LDAP queries',
+    :type => 'string',
+    :default => '5'
+
+attribute 'nslcd/uid',
+    :display_name => 'uid',
+    :description => 'specifies the user id with which the daemon should be run',
+    :type => 'string',
+    :default => 'nslcd'
+
+attribute 'nslcd/gid',
+    :display_name => 'gid',
+    :description => 'specifies the group id with which the daemon should be run',
+    :type => 'string',
+    :default => 'ldap'
+
+attribute 'nslcd/log',
+    :display_name => 'log',
+    :description => 'controls the way logging is done, options SCHEME and LEVEL',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/uri',
+    :display_name => 'uri',
+    :description => 'specifies the LDAP URI of the server to connect to',
+    :type => 'string',
+    :default => 'ldap://example.com'
+
+attribute 'nslcd/ldap_version',
+    :display_name => 'ldap_version',
+    :description => 'specifies the version of ldap protocol to use',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/binddn',
+    :display_name => 'binddn',
+    :description => 'sepcifies the distinguished name with which to bind to the directory services for lookup',
+    :type => 'string',
+    :default => 'DC=something,DC=example,DC=com'
+
+attribute 'nslcd/bindpw',
+    :dipslay_name => 'bindpw',
+    :description => 'specifies the credentials with which to bind',
+    :type => 'string',
+    :default => 'bindpasswd'
+
+attribute 'nslcd/rootpwmoddn',
+    :display_name => 'rootpwmoddn',
+    :description => 'specifies the distinguished name to use when the root user tries to modify a user\'s password using the PAM module',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/rootpwmodpw',
+    :display_name => 'rootpwmodpw',
+    :description => 'specifies the credential with which to bind if the root user tries to change a users\'s password',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/sasl/enable',
+    :display_name => 'sasl enable',
+    :description => 'enable SASL configuration',
+    :type => 'boolean',
+    :default => 'false'
+
+attribute 'nscld/sasl/mech',
+    :display_name => 'sasl mech',
+    :description => 'specifies the SASL mechanism to be used when performing SASL authentication',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/sasl/realm',
+    :display_name => 'sasl realm',
+    :description => 'speficies the SASL realm to be used',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/sasl/authcid',
+    :display_name => 'sasl authcid',
+    :description => 'specifies the authentication identity to be used when performing SASL authentication',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/sasl/authzid',
+    :display_name => 'sasl authzid',
+    :description => 'specifies the authorization idenity to be used when performing SASL authentication',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/sasl/secprops',
+    :display_name => 'sasl secprops',
+    :description => 'specifies Cyrus SASL security properties',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/sasl/canonicalize',
+    :display_name => 'sasl canonicalize',
+    :description => 'specifies whether the LDAP server host name should be canonicalized',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/krb5_ccname',
+    :display_name => 'krb5_ccname',
+    :description => 'set the name for the GSS-API Kerberos credentials cache',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/base',
+    :display_name => 'base',
+    :description => 'specifies the base distinguished name (DN) to use as search base',
+    :type => 'string',
+    :default => 'DC=something,DC=here,DC=com'
+
+attribute 'nslcd/scope',
+    :display_name => 'scope',
+    :description => 'specifies the search scope',
+    :type => 'string',
+    :default => 'sub'
+
+attribute 'nslcd/deref',
+    :display_name => 'deref',
+    :description => 'specifies the policy for dereferencing aliases',
+    :type => 'string',
+    :default => 'never'
+
+attribute 'nslcd/referrals',
+    :display_name => 'referrals',
+    :descriptions => 'specifies whether automatic referral chasing should be enabled',
+    :type => 'string',
+    :default => 'yes'
+
+attribute 'nslcd/bind_timelimit',
+    :display_name => 'bind_timelimit',
+    :descriptions => 'specifies the time limit (in seconds) to use when connecting to the directory server',
+    :type => 'string',
+    :default => '10'
+
+attribute 'nslcd/timelimt',
+    :display_name => 'timelimit',
+    :description => 'specifies the time limit (in seconds) after which the connection to the LDAP server will be closed',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/idle_timelimit',
+    :display_name => 'idle_timeout',
+    :description => 'specifies the period of inactiviity (in seconds) after which the connection to the LDAP server will be closed',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/reconnect_sleeeptime',
+    :display_name => 'reconnect_sleeptime',
+    :description => 'specifies the number of seconds to sleep when connecting to all LDAP servers fail',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/reconnect_retrytime',
+    :display_name => 'reconnect_retrytime',
+    :description => 'specifies the time after which the LDAP server is considered to be permanently unavailable',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/ssl',
+    :display_name => 'ssl',
+    :description => 'specifies whether to use SSL/TLS',
+    :type => 'string',
+    :default => 'off'
+
+attribute 'nslcd/tls_reqcert',
+    :display_name => 'tls_reqcert',
+    :description => 'specifies what checks to perform on a server-supplied certificate',
+    :type => 'string',
+    :default => 'never'
+
+attribute 'nslcd/tlscacertdir',
+    :display_name => 'tlscacertdir',
+    :description => 'specifies the directory containing the X.509 certificates for peer authentication',
+    :type => 'string',
+    :default => '/etc/openldap/cacerts'
+
+attribute 'nslcd/tls_cacertfile',
+    :display_name => 'tls_cacertfile',
+    :description => 'specifies the path to the X.509 certificat for peer authentication',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/tls_randfile',
+    :display_name => 'tls_randfile',
+    :description => 'specifies the path to an entropy source',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/tls_ciphers',
+    :display_name => 'tls_ciphers',
+    :description => 'specifies the ciphers to use for TLS',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/tls_cert',
+    :display_name => 'tls_cert',
+    :description => 'specifies path to the file containing the local certificate for client TLS authentication',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/tls_key',
+    :display_name => 'tls_key',
+    :description => 'specifies path to the file containing the priate key for client TLS authentication',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/pagesize',
+    :display_name => 'pagesize',
+    :description => 'set this to a number greater than zero to request paged results from the LDAP server',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/nss_intgroups_ignoreusers',
+    :display_name => 'nss_intgroups_ignoreusers',
+    :description => 'prevents group membership lookups through LDAP for specified users',
+    :type => 'string',
+    :default => 'root'
+
+attribute 'nslcd/nss_min_uid',
+    :display_name => 'nss_min_uid',
+    :description => 'LDAP users with a numeric user id lower than specified value are ignored',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/nss_nested_groups',
+    :display_name => 'nss_nested_groups',
+    :description => 'if set to yes the member attribute of a group may point to another group',
+    :type => 'string',
+    :defaule => ''
+
+attribute 'nslcd/validnames',
+    :display_name => 'validnames',
+    :description => 'regex used to specify how user and group names are verified in the system',
+    :type => 'string',
+    :default => '/^[a-z0-9._@$()]([a-z0-9._@$() \\~-]*[a-z0-9._    @$()~-])?$/i'
+
+attribute 'nslcd/ignorecase',
+    :display_name => 'ignorecase',
+    :description => 'specifies whether or not to perform searches for group, netgroup, passwd, protocols, rpc, services, and shadow maps using case insensitive mapping',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/pam_authz_search',
+    :display_name => 'pam_authz_search',
+    :description => 'allows flixble fine tuning of authorization check that shoudl be performed',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/pam_password_prohibit_message',
+    :display_name => 'pam_password_prohibit_message',
+    :description => 'disables password modification using pam_ldap and displays the message to the user',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/reconnect_invalidate',
+    :display_name => 'reconnect_invalidate',
+    :description => 'if set, on startup and whenever a connection to the LDAP server is re-established after an error the specified caches are flushed',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/cache',
+    :display_name => 'nslcd',
+    :description => 'time entries are kept in thie specified internal cache',
+    :type => 'string',
+    :default => ''
+
+attribute 'nslcd/filters',
+    :display_name => 'filters',
+    :description => 'Hash of filter mapping',
+    :type => 'hash',
+    :default => '[]'
+
