@@ -10,19 +10,23 @@ else
   default['nslcd']['package'] = 'nslcd'
 end
 
+# data bag configuraiton
+
+default['nslcd']['data_bag'] = 'nslcd'
+default['nslcd']['data_bag_name'] = 'nslcd'
 # runtime options
 default['nslcd']['threads'] = 5
-default['nslcd']['uid'] = 'nslcd'
-default['nslcd']['gid'] = 'ldap'
+# default['nslcd']['uid'] = 'nslcd'
+# default['nslcd']['gid'] = 'ldap'
 default['nslcd']['log'] = ''
 
 # general connection options
 default['nslcd']['uri'] = 'ldap://example.com'
 default['nslcd']['ldap_version'] = ''
-default['nslcd']['binddn'] = 'DC=something,DC=here,DC=com'
-default['nslcd']['bindpw'] = 'bindpasswd'
-default['nslcd']['rootpwmoddn'] = ''
-default['nslcd']['rootpwmodpw'] = ''
+# default['nslcd']['binddn'] = 'DC=something,DC=here,DC=com'
+# default['nslcd']['bindpw'] = 'bindpasswd'
+# default['nslcd']['rootpwmoddn'] = ''
+# default['nslcd']['rootpwmodpw'] = ''
 
 # SASL authentication options
 default['nslcd']['sasl']['enable'] = false
@@ -37,7 +41,7 @@ default['nslcd']['sasl']['canonicalize'] = ''
 default['nslcd']['krb5_ccname'] = ''
 
 # search options
-default['nslcd']['base'] = 'DC=something,DC=here,DC=com'
+# default['nslcd']['base'] = 'DC=something,DC=here,DC=com'
 default['nslcd']['scope'] = 'sub'
 default['nslcd']['deref'] = 'never'
 default['nslcd']['referrals'] = 'yes'
