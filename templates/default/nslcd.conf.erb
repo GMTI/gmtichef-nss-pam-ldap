@@ -6,24 +6,24 @@
 
 #runtime options
 threads 		<%= @settings['threads'] %>
-uid				<%= @settings['uid'] %>
-gid				<%= @settings['gid'] %>
+uid				<%= @nssbagconfigs['uid'] %>
+gid				<%= @nssbagconfigs['gid'] %>
 <% unless @settings['log'].empty? -%>
 log             <%= @settings['log'] %>
 <% end -%>
 
 #general connection options
-uri				<%= @settings['uri'] %>
+uri				<%= @nssbagconfigs['uri'] %>
 <% unless @settings['ldap_version'].empty? -%>
 ldap_version	<%= @settings['ldap_version'] %>
 <% end -%>
-binddn			<%= @settings['binddn'] %>
-bindpw			<%= @settings['bindpw'] %>
-<% unless @settings['rootpwmoddn'].empty? -%>
-rootpwmoddn     <%= @settings['rootpwmoddn'] %>
+binddn			<%= @nssbagconfigs['binddn'] %>
+bindpw			<%= @nssbagconfigs['bindpw'] %>
+<% unless @nssbagconfigs['rootpwmoddn'].empty? -%>
+rootpwmoddn     <%= @nssbagconfigs['rootpwmoddn'] %>
 <% end -%>
-<% unless @settings['rootpwmodpw'].empty? -%>
-rootpwmodpw     <%= @settings['rootpwmodpw'] %>
+<% unless @nssbagconfigs['rootpwmodpw'].empty? -%>
+rootpwmodpw     <%= @nssbagconfigs['rootpwmodpw'] %>
 <% end -%>
 
 #SASL authentication options
@@ -43,8 +43,8 @@ krb5_ccname       <%= @settings['krb5_ccname'] %>
 <% end -%>
 
 #Search options
-<% unless @settings['base'].empty? -%>
-base 			<%= @settings['base'] %>
+<% unless @nssbagconfigs['base'].empty? -%>
+base 			<%= @nssbagconfigs['base'] %>
 <% end -%>
 scope			<%= @settings['scope'] %>
 deref			<%= @settings['deref'] %>
